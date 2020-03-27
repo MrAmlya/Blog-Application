@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block containt %}
+
+        <div class="post">
+
+            {% if post.published_date %}
+            <div class="date">
+                <p>published: {{ post.published_date }}</p>
+            </div>
+
+            {% endif %}
+
+            {% if request.user == post.author %}
+            <a class="btn btn-default" href="{% url 'post_edit'  pk=post.pk %}"> <span class="glyphicon glyphicon-pencil"></span class> </a>
+            <a class="btn btn-default" href="{% url 'post_remove'  pk=post.pk %}"> <span class="glyphicon glyphicon-remove"></span class> </a>
+
+            {% endif %}    
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+
+            
+        </div>
+
+{% endblock %}
